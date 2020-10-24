@@ -4,7 +4,7 @@
 
 enum Channel : uint8_t {CH_A = 0, CH_B=1};
 enum Gain : uint8_t {X2 = 0, X1=1};
-enum PenState : bool {PENUP=false, PENDOWN=true};
+enum PenState : bool {PENUP=true, PENDOWN=false};
 
 class plt4822 {
     int spifd;
@@ -21,6 +21,6 @@ public:
     void setGain(Gain g);
     void output(Channel ch, uint16_t value);
     void output(uint16_t ch_a, uint16_t ch_b);
-    void setPen(PenState s);
+    PenState setPen(PenState s);
 };
 #endif // PLT4822_H

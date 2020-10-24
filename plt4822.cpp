@@ -58,8 +58,9 @@ void plt4822::setGain(Gain a) {
     gain = a;
 }
 
-void plt4822::setPen(PenState s) {
-    write(pl_value, (s) ? "1\n" : "0\n", 2);
+PenState plt4822::setPen(PenState s) {
+    write(pl_value, (s) ? "0\n" : "1\n", 2);
+    return s;
 }
 
 void plt4822::output(Channel ch, uint16_t value) {
