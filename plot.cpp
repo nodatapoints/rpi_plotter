@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <csignal>
 
 const auto dev = "/dev/spidev0.0";
 const auto plPin = 5;
@@ -28,11 +29,11 @@ int main(int argc, const char *argv[]) {
 
     Pos pos{};
     PenState penup = PENUP;
-    std::string line{};
     while (!signal_status && std::cin) {
+        std::string line;
         std::getline(std::cin, line);
 
-        if (line.at(0) == '\n') {
+        if (line.empty()) {
             penup = plotter.setPen(PENUP);
             continue;
         }
@@ -40,7 +41,7 @@ int main(int argc, const char *argv[]) {
         linestream >> pos;
 
         if (penup)
-            plotter.setPen(PENDOWN);
+            penup = plotter.setPen(PENDOWN);
 
         plotter.gotoPos(pos);
     }

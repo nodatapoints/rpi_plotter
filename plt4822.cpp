@@ -40,6 +40,7 @@ plt4822::plt4822(const char* device, uint8_t pl_pin, uint32_t speed)
 }
 
 plt4822::~plt4822() {
+    disable();
     close(spifd);
     close(pl_value);
 
@@ -73,4 +74,9 @@ void plt4822::output(Channel ch, uint16_t value) {
 void plt4822::output(uint16_t ch_a, uint16_t ch_b) {
     output(CH_A, ch_a);
     output(CH_B, ch_b);
+}
+
+void plt4822::disable() {
+    writeSPI(0b0000'0000'0000'0000);
+    writeSPI(0b0000'0000'1000'0000);
 }

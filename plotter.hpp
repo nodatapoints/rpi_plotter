@@ -2,14 +2,7 @@
 #define PLOTTER_H
 #include "plt4822.hpp"
 
-#include <csignal>
 #include <iostream>
-#include <chrono>
-#include <thread>
-#include <cmath>
-
-using std::this_thread::sleep_for;
-using namespace std::chrono_literals;
 
 struct Pos {
     double x, y;
@@ -18,13 +11,10 @@ struct Pos {
     Pos operator-(const Pos& b) const { return {x-b.x, y-b.y}; }
 };
 
-std::istream& operator>>(std::istream& in, Pos& pos) {
-    return in >> pos.x >> pos.y;
-}
-
-
-double dist(const Pos& a, const Pos& b) {
-    return std::hypot(b.x-a.x, b.y-a.y);
+namespace { 
+    std::istream& operator>>(std::istream& in, Pos& pos) {
+        return in >> pos.x >> pos.y;
+    }
 }
 
 class Plotter : private plt4822 {

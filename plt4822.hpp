@@ -21,6 +21,7 @@ public:
     void setGain(Gain g);
     void output(Channel ch, uint16_t value);
     void output(uint16_t ch_a, uint16_t ch_b);
+    void disable();
     PenState setPen(PenState s);
 };
 #endif // PLT4822_H
