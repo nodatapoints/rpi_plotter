@@ -8,11 +8,15 @@ using std::this_thread::sleep_for;
 using namespace std::chrono_literals;
 
 namespace {
+    // TODO make these settable options for Plotter
     constexpr auto speed = 50.0;  // mm per second
     constexpr auto segment_length = 1.0;  // mm
 
     constexpr auto ts = segment_length / speed * 1s;
     constexpr auto unit_per_mm = 10.0;
+
+    constexpr auto penup_delay = 200ms;
+    constexpr auto pendown = 200ms;
 }
 
 double dist(const Pos& a, const Pos& b) {
